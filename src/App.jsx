@@ -4,6 +4,8 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import { useFetchye } from 'fetchye'
 
+console.log("latest Fetchye")
+
 function App() {
   const [count, setCount] = useState(0)
   const [id, setId] = useState(1);
