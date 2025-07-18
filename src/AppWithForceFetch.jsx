@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from 'react'
+import { useContext, useRef } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -13,10 +13,12 @@ function App() {
   const numOfRenders = useRef(0);
   numOfRenders.current += 1;
   if (numOfRenders.current == 1) {
-    console.log("fetchye not forced fetch")
+    console.log(`fetchye forced fetch, with ${id}`)
   }
 
-  const { data, error, isLoading } = useFetchye(id);
+  const { data, error, isLoading } = useFetchye(id, {
+    forceInitialFetch: true 
+  });
   console.log({ id, data, error, isLoading });
 
   return (
@@ -38,10 +40,10 @@ function App() {
           id is {id}
         </button>
         <button onClick={() => {
-          console.log(`navigating to AppWithForceFetch`)
-          navigate("/app-with-force-fetch")
+          console.log(`navigating to App`)
+          navigate("/")
         }}>
-          navigate to AppWithForceFetch
+          navigate to App
         </button>
       </div>
     </>
