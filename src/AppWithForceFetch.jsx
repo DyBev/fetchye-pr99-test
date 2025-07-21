@@ -6,7 +6,6 @@ import { useFetchye } from 'fetchye'
 import { IdContext } from './IdContext'
 import { useNavigate } from 'react-router-dom'
 
-
 function App() {
   const { id, setId } = useContext(IdContext)
   const navigate = useNavigate();
@@ -17,9 +16,17 @@ function App() {
   }
 
   const { data, error, isLoading } = useFetchye(id, {
-    forceInitialFetch: true 
+    forceInitialFetch: true,
+    mapOptionsToKey: () => ({}),
   });
+  const { data: pocketdata, error: pocketerror, isLoading: pocketisLoading } = useFetchye(
+    "http://127.0.0.1:8090/api/collections/testing/records/n1kvy882szoh0v9", {
+    forceInitialFetch: true,
+    mapOptionsToKey: () => ({}),
+  });
+
   console.log({ id, data, error, isLoading });
+  console.log({ id: '127.0.0.1:8090', pocketdata, pocketerror, pocketisLoading });
 
   return (
     <>
@@ -33,17 +40,18 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
+        number of renders = {numOfRenders.current}
+      </div>
+      <div className="card">
         <button onClick={() => {
-          console.log(`updating count to ${id === 1 ? 2 : 1}`)
-          setId(id === 1 ? 2 : 1);
+          navigate("/edit")
         }}>
-          id is {id}
+          edit
         </button>
         <button onClick={() => {
-          console.log(`navigating to App`)
           navigate("/")
         }}>
-          navigate to App
+          App
         </button>
       </div>
     </>

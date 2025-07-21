@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from 'react'
+import { useContext, useEffect, useRef } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -16,8 +16,12 @@ function App() {
     console.log("fetchye not forced fetch")
   }
 
+  const { data: pocketdata, error: pocketerror, isLoading: pocketisLoading } = useFetchye(
+    "http://127.0.0.1:8090/api/collections/testing/records/n1kvy882szoh0v9"
+  );
   const { data, error, isLoading } = useFetchye(id);
   console.log({ id, data, error, isLoading });
+  console.log({ id: '127.0.0.1:8090', pocketdata, pocketerror, pocketisLoading });
 
   return (
     <>
@@ -31,17 +35,18 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
+        number of renders = {numOfRenders.current}
+      </div>
+      <div className="card">
         <button onClick={() => {
-          console.log(`updating count to ${id === 1 ? 2 : 1}`)
-          setId(id === 1 ? 2 : 1);
+          navigate("/edit")
         }}>
-          id is {id}
+          edit
         </button>
         <button onClick={() => {
-          console.log(`navigating to AppWithForceFetch`)
-          navigate("/app-with-force-fetch")
+          navigate("/force-fetch")
         }}>
-          navigate to AppWithForceFetch
+          ForceFetch
         </button>
       </div>
     </>
