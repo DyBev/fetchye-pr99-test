@@ -8,7 +8,8 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview --host 127.0.0.1",
-    "database": "./database/pocketbase serve"
+    "database": "./database/pocketbase serve",
+    "database:mac": "./database/pocketbase_mac serve"
   },
   "dependencies": {
     "@carbon/icons-react": "^11.63.0",
