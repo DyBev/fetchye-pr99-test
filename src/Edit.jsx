@@ -13,7 +13,7 @@ function App() {
     "http://127.0.0.1:8090/api/collections/testing/records/n1kvy882szoh0v9"
   );
 
-  const useUpdateDatabase = (Title, number_of_changes) => fetch(
+  const updateDatabase = (Title, number_of_changes) => fetch(
     "http://127.0.0.1:8090/api/collections/testing/records/n1kvy882szoh0v9",
     {
       method: "PATCH",
@@ -39,7 +39,7 @@ function App() {
         { success && <div><CheckmarkOutline /> success updating database</div> }
         <input type="text" onChange={(e) => setTitle(e.target.value)} placeholder={title} />
         <button onClick={() => {
-          useUpdateDatabase(title, numberOfChanges+1).then(() => {
+          updateDatabase(title, numberOfChanges+1).then(() => {
             setSuccess(true)
           })
         }}>
